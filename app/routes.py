@@ -6,6 +6,7 @@ from app.forms import LoginForm
 @app.route('/')
 @app.route('/index')
 def index():
+    """Функция представления главной страницы."""
     user = {'username': 'Roman'}
     posts = [
         {
@@ -22,6 +23,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """Функция представления формы авторизации."""
     form = LoginForm()
     if form.validate_on_submit():  # запускается проверка данных из формы
         flash('Login requested for user {}, remember_me={}'.format(
