@@ -10,7 +10,7 @@ from app.models import User
 @app.route('/')
 @app.route('/index')
 def index():
-    """Метод представления главной страницы."""
+    """Функция представления главной страницы."""
     user = {'username': 'Roman'}
     posts = [
         {
@@ -27,7 +27,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """Метод представления формы авторизации."""
+    """Функция представления формы авторизации."""
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
