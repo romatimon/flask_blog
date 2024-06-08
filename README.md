@@ -2,4 +2,4 @@
 
 Pet-проект - это простой микроблог, который позволяет пользователям публиковать короткие текстовые сообщения (посты) и взаимодействовать с ними.
 
-Python, Flask, SQLAlchemy, SQLite
+Python, Flask, SQLAlchemy, SQLite, HTML, CSS
