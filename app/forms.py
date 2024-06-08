@@ -24,14 +24,14 @@ class RegistrationForm(FlaskForm):
 
     def validate_username(self, username):
         """Метод проверяет, существует ли в базе данных пользователь с указанным именем
-        пользователя, и сохраняет этого пользователя в переменной user"""
+        пользователя, и сохраняет этого пользователя в переменной user."""
         user = db.session.scalar(sa.select(User).where(User.username == username.data))
         if user is not None:
             raise ValidationError('Please use a different username.')
 
     def validate_email(self, email):
         """Метод проверяет, существует ли в базе данных пользователь с указанным email,
-         и сохраняет этого пользователя в переменной user"""
+         и сохраняет этого пользователя в переменной user."""
         user = db.session.scalar(sa.select(User).where(
             User.email == email.data))
         if user is not None:

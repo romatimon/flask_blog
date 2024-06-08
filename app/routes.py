@@ -69,3 +69,16 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))  # перенаправляет на приглашение для входа
     return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/user/<username>')  # динамический компонент
+@login_required
+def user(username):
+    """Функция просмотра профиля пользователя."""
+    user = db.first_or_404(sa.select(User).where(
+        User.username == username))  # возвращает первый результат запроса или ошибку 404, если в нем нет строк.
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)

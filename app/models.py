@@ -1,3 +1,4 @@
+from hashlib import md5  # хеширование данных заданного файла по алгоритму MD5
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone
 from typing import Optional
@@ -19,6 +20,15 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User> {}'.format(self.username)
+
+    def avatar(self, size):
+        """Метод возвращает URL изображения аватара пользователя,
+        масштабированный до требуемого размера в пикселях."""
+        # digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        # return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
+
+        digest = md5('rtimonin569@gmail.com'.encode('utf-8')).hexdigest()
+        return f'https://www.gravatar.com/avatar/{digest}'
 
     def set_password(self, password):
         """Метод генерирует хэш при создании пароля."""
