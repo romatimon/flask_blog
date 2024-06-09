@@ -1,79 +1,34 @@
+<!doctype html>
 <html>
-  <head>
-    {% if title %}
-      <title>{{ title }} - microblog</title>
-    {% else %}
-      <title>microblog</title>
-    {% endif %}
-    <style>
-      /* Общие стили */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #dcdcdc;
-
-      }
-
-      /* Стили для шапки */
-      .header {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-      }
-
-      .header a {
-        color: #fff;
-        text-decoration: none;
-        margin-right: 20px;
-      }
-
-      .header a:hover {
-        color: #ccc;
-      }
-
-      /* Стили для контента */
-      .content {
-        padding: 20px;
-      }
-
-      /* Стили для сообщений */
-      .messages {
-        background-color: #f2f2f2;
-        padding: 10px;
-        margin-bottom: 20px;
-      }
-
-      .messages li {
-        list-style-type: none;
-        margin-bottom: 5px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      Microblog:
-      <a href="{{ url_for('index') }}">Home</a>
-      {% if current_user.is_anonymous %}
-      <a href="{{ url_for('login') }}">Login</a>
-      {% else %}
-      <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-      <a href="{{ url_for('logout') }}">Logout</a>
-      {% endif %}
-    </div>
-    <div class="content">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <div class="messages">
-            <ul>
-              {% for message in messages %}
-                <li>{{ message }}</li>
-              {% endfor %}
-            </ul>
-          </div>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Microblog</title>
+        {% else %}
+        <title>Welcome to Microblog</title>
         {% endif %}
-      {% endwith %}
-      {% block content %}{% endblock %}
-    </div>
+    </head>
+    <body>
+        <div>
+            Microblog:
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('explore') }}">Explore</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
   </body>
 </html>

@@ -60,4 +60,11 @@ class EditProfileForm(FlaskForm):
 
 
 class EmptyForm(FlaskForm):
+    """Форма подписки и отписки."""
+    submit = SubmitField('Submit')
+
+
+class PostForm(FlaskForm):
+    """Форма для отправки сообщений в блог."""
+    post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=150)])
     submit = SubmitField('Submit')
